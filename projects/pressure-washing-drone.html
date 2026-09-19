@@ -1,6 +1,1583 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Autonomous pressure-washing drone developed at Columbia Creative Machines Lab."><title>Pressure-Washing Drone — Srividya Srinivas</title><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230b57ff'/%3E%3Cpath d='M17 22h30v22H17zM25 16v6m14-6v6M23 31h4m10 0h4M25 38h14' stroke='white' stroke-width='4' fill='none'/%3E%3C/svg%3E"><link rel="stylesheet" href="../assets/style.css"></head>
-<body><a class="skip-link" href="#main">Skip to content</a><header class="site-header"><div class="nav-shell"><a class="brand" href="../index.html"><span class="brand-mark">SS</span> SRIVIDYA SRINIVAS</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button><nav class="main-nav" id="main-nav" aria-label="Primary navigation"><a href="../index.html">Home</a><a href="../about.html">About</a><div class="nav-group"><button class="nav-trigger" type="button" aria-expanded="false">Projects</button><div class="dropdown"><a href="../projects.html">All projects</a><a href="docksight.html">DockSight</a><a href="pressure-washing-drone.html" aria-current="page">Pressure-washing drone</a><a href="ros2-patrol.html">ROS 2 patrol robot</a></div></div><a href="../research.html">Research</a><a href="../resume.html">Resume</a><a href="../contact.html">Contact</a></nav></div></header>
-<main id="main"><section class="project-hero"><div class="shell"><div class="breadcrumb"><a href="../projects.html">Projects</a> / Mechatronics & Integration</div><p class="eyebrow">Creative Machines Lab · Columbia University</p><h1>Aerial <span>pressure-washing system.</span></h1><p class="project-lede">A mechatronics integration project combining an aerial platform, Pixhawk flight control, Raspberry Pi compute, camera sensing, high-current power switching, and a compact pressure-washing subsystem.</p><div class="project-meta"><div class="meta-cell"><span>Role</span><strong>Mechatronics / systems integration</strong></div><div class="meta-cell"><span>Team</span><strong>Creative Machines Lab</strong></div><div class="meta-cell"><span>Flight stack</span><strong>Pixhawk 2.4.8 · ArduPilot</strong></div><div class="meta-cell"><span>Compute</span><strong>Raspberry Pi 4 · MAVLink</strong></div></div><div class="project-visual"><div class="architecture"><div class="node"><small>01 / PILOT</small><div><strong>RC + Pixhawk</strong><p>Flight state and vehicle control</p></div></div><div class="arrow">↔</div><div class="node"><small>02 / COMPUTE</small><div><strong>Raspberry Pi 4</strong><p>MAVLink interface and camera</p></div></div><div class="arrow">→</div><div class="node"><small>03 / SWITCH</small><div><strong>High-current control</strong><p>SSR and trigger interface</p></div></div><div class="arrow">→</div><div class="node"><small>04 / WASH</small><div><strong>18 V washer</strong><p>Onboard pressure and siphon flow</p></div></div></div></div></div></section>
-<section class="section white"><div class="shell case-layout"><nav class="case-nav" aria-label="Case study sections"><a href="#goal">01 Goal</a><a href="#constraints">02 Constraints</a><a href="#architecture">03 Architecture</a><a href="#iterations">04 V1 → V2</a><a href="#bench">05 Bench test</a></nav><div class="case-content"><section id="goal"><p class="eyebrow">01 / Goal</p><h2>Bring façade cleaning hardware into the air.</h2><p>The project explores an aerial platform for pressure-washing skyscraper façades. The systems challenge is not simply mounting a washer: flight, mass, power, fluid, vibration, communication, sensing, and safety all interact.</p></section><section id="constraints"><p class="eyebrow">02 / Constraints</p><h2>Every gram and amp matters.</h2><p>The vehicle’s maximum takeoff mass is approximately 5 kg. Early integration showed how quickly the payload budget disappeared once the sprayer housing, filled tubing, battery, mounting hardware, and washer were counted together.</p><div class="fact-grid"><div class="fact"><span>MTOW</span><strong>Approximately 5 kg</strong></div><div class="fact"><span>V1 system mass</span><strong>Approximately 4.5 kg</strong></div><div class="fact"><span>V2 system mass</span><strong>Approximately 4.1 kg</strong></div><div class="fact"><span>Washer current surge</span><strong>Approximately 25 A</strong></div></div><div class="callout"><strong>Integration consequence</strong>Power-switch selection, hose routing, water mass, and mechanical packaging had to be designed as one coupled problem.</div></section><section id="architecture"><p class="eyebrow">03 / Architecture</p><h2>Flight and payload, connected but separable.</h2><p>A Pixhawk running ArduPilot provides the flight-control core. A Raspberry Pi 4 communicates over MAVLink and hosts camera-side compute. The Ryobi ONE+ HP 18 V washer is treated as a high-current payload with a dedicated trigger interface and suitably rated solid-state switching.</p><div class="fact-grid"><div class="fact"><span>Flight controller</span><strong>Pixhawk 2.4.8</strong></div><div class="fact"><span>Companion computer</span><strong>Raspberry Pi 4</strong></div><div class="fact"><span>Vision</span><strong>Pi Camera v2</strong></div><div class="fact"><span>Payload power</span><strong>18 V · 4 Ah battery</strong></div></div></section><section id="iterations"><p class="eyebrow">04 / V1 → V2</p><h2>Move pressure generation onboard.</h2><div class="timeline"><div class="timeline-item"><span>Version 1</span><p>Ground-based pump and heavier hose architecture created a demanding tether and mass distribution.</p></div><div class="timeline-item"><span>Finding</span><p>The fluid-delivery approach imposed penalties that could not be treated as a minor packaging issue.</p></div><div class="timeline-item"><span>Version 2</span><p>Onboard Ryobi washer with a siphon hose reduced total system mass and simplified the aerial interface.</p></div></div></section><section id="bench"><p class="eyebrow">05 / Bench test</p><h2>Verify interfaces before flight.</h2><p>Bench work validated USB MAVLink communication between the Raspberry Pi and Pixhawk, heartbeat reception, and attitude telemetry. Testing stayed intentionally off-aircraft while serial reliability, message streaming, trigger behavior, and power architecture were being established.</p><div class="callout"><strong>Systems habit</strong>De-risk communication, power, and actuator interfaces on the bench before they become flight failures.</div><a class="button" href="../projects.html">Back to all projects ↗</a></section></div></div></section></main>
-<footer class="site-footer"><div class="shell footer-grid"><p>© <span data-year></span> SRIVIDYA SRINIVAS</p><div class="footer-links"><a href="../projects.html">All projects</a><a href="mailto:ss7703@columbia.edu">Email</a></div></div></footer><script src="../assets/main.js"></script></body></html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="An ongoing aerial pressure-washing platform integrating flight hardware, washer actuation, Raspberry Pi computing, camera and LiDAR sensing, and tethered fluid delivery."
+  >
+
+  <title>
+    Pressure-Washing Drone | Srividya Srinivas
+  </title>
+
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <style>
+    /*
+      ============================================================
+      DRONE PAGE — SAME PROJECT UI AS THE REST OF THE PORTFOLIO
+      ============================================================
+    */
+
+    html,
+    body {
+      background: #ffffff;
+      color: #101217;
+    }
+
+
+    /* ------------------------------------------------------------
+       HEADER
+       ------------------------------------------------------------ */
+
+    .site-header {
+      background-color: #050608 !important;
+      color: #ffffff !important;
+    }
+
+    .site-header .brand,
+    .site-header .brand:link,
+    .site-header .brand:visited,
+    .site-header .main-nav > a,
+    .site-header .main-nav > a:link,
+    .site-header .main-nav > a:visited,
+    .site-header .nav-trigger,
+    .site-header .menu-toggle {
+      color: #ffffff !important;
+    }
+
+    .site-header .nav-trigger,
+    .site-header .menu-toggle {
+      background: transparent !important;
+    }
+
+    .site-header .dropdown {
+      background: #0d1117 !important;
+    }
+
+    .site-header .dropdown a,
+    .site-header .dropdown a:link,
+    .site-header .dropdown a:visited {
+      color: #ffffff !important;
+      background: #0d1117 !important;
+    }
+
+    .site-header .dropdown a:hover,
+    .site-header .dropdown a:focus-visible {
+      color: #101217 !important;
+      background: #ffffff !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       HERO
+       Keep the same shared project-hero visual system as Mars Rover
+       ------------------------------------------------------------ */
+
+    .project-hero {
+      background-color: #05080b !important;
+      color: #ffffff !important;
+    }
+
+    .project-hero .breadcrumb,
+    .project-hero .breadcrumb a {
+      color: #9ca5ae !important;
+    }
+
+    .project-hero > .shell > .eyebrow {
+      color: #0e5d9b !important;
+    }
+
+    .project-hero h1 {
+      color: #ffffff !important;
+    }
+
+    /*
+      Do NOT force the span white.
+      The shared project stylesheet uses the span as the blue
+      second line, matching the Mars Rover UI.
+    */
+
+    .project-hero .project-lede {
+      color: #f0f2f5 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       PROJECT META
+       ------------------------------------------------------------ */
+
+    .project-meta {
+      color: #ffffff !important;
+    }
+
+    .project-meta .meta-cell {
+      color: #ffffff !important;
+      background: transparent !important;
+    }
+
+    .project-meta .meta-cell span {
+      color: #0e5d9b !important;
+    }
+
+    .project-meta .meta-cell strong {
+      color: #ffffff !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       HERO ARCHITECTURE STRIP
+       ------------------------------------------------------------ */
+
+    .project-visual {
+      color: #ffffff !important;
+    }
+
+    .project-visual .architecture {
+      color: #ffffff !important;
+    }
+
+    .project-visual .node {
+      color: #ffffff !important;
+      background: rgba(13, 17, 23, 0.78) !important;
+      border-color: #303740 !important;
+    }
+
+    .project-visual .node small {
+      color: #0e5d9b !important;
+    }
+
+    .project-visual .node strong {
+      color: #ffffff !important;
+    }
+
+    .project-visual .node p {
+      color: #b8c0c9 !important;
+    }
+
+    .project-visual .arrow {
+      color: #6f7882 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       PROJECT MEDIA
+       ------------------------------------------------------------ */
+
+    .drone-media {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .drone-media-column {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .drone-media-card {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      overflow: hidden;
+      color: #ffffff !important;
+      background: #0f1218 !important;
+      border: 1px solid #303740;
+    }
+
+    .drone-media-card img {
+      display: block;
+      width: 100%;
+      background: #0f1218;
+      object-fit: contain;
+    }
+
+    .drone-media-card.primary img {
+      min-height: 520px;
+      max-height: 650px;
+    }
+
+    .drone-media-card.secondary img {
+      height: 250px;
+    }
+
+    .drone-media-card figcaption {
+      padding: 1rem;
+      color: #e8ebee !important;
+      background: #0f1218 !important;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+
+    /* ------------------------------------------------------------
+       WHITE CASE STUDY AREA
+       ------------------------------------------------------------ */
+
+    .section.white {
+      background: #ffffff !important;
+      color: #101217 !important;
+    }
+
+    .section.white .case-layout,
+    .section.white .case-content,
+    .section.white .case-content > section {
+      background: #ffffff !important;
+      color: #101217 !important;
+    }
+
+    .section.white h1,
+    .section.white h2,
+    .section.white h3,
+    .section.white h4,
+    .section.white strong {
+      color: #101217 !important;
+    }
+
+    .section.white p {
+      color: #475161 !important;
+    }
+
+    .section.white .eyebrow {
+      color: #0e5d9b !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       LEFT CASE NAV
+       ------------------------------------------------------------ */
+
+    .case-nav {
+      background: #ffffff !important;
+      color: #101217 !important;
+    }
+
+    .case-nav a,
+    .case-nav a:link,
+    .case-nav a:visited {
+      color: #303840 !important;
+      background: #ffffff !important;
+    }
+
+    .case-nav a:hover,
+    .case-nav a:focus-visible {
+      color: #ffffff !important;
+      background: #101318 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       FACT CARDS
+       ------------------------------------------------------------ */
+
+    .fact-grid {
+      color: #101217 !important;
+    }
+
+    .fact {
+      color: #101217 !important;
+      background: #f4f5f6 !important;
+      border-color: #d7dbde !important;
+    }
+
+    .fact span {
+      color: #697179 !important;
+    }
+
+    .fact strong {
+      color: #101217 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       TIMELINES
+       ------------------------------------------------------------ */
+
+    .timeline {
+      color: #101217 !important;
+    }
+
+    .timeline-item {
+      color: #101217 !important;
+      background: #ffffff !important;
+      border-color: #d6dadd !important;
+    }
+
+    .timeline-item > span {
+      color: #0e5d9b !important;
+    }
+
+    .timeline-item h3 {
+      color: #101217 !important;
+    }
+
+    .timeline-item p {
+      color: #475161 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       PAYLOAD COMPARISON
+       ------------------------------------------------------------ */
+
+    .payload-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .payload-card {
+      padding: 2rem;
+      color: #101217 !important;
+      background: #f4f5f6 !important;
+      border: 1px solid #d7dbde;
+    }
+
+    .payload-card span {
+      display: block;
+      margin-bottom: 1rem;
+      color: #0e5d9b !important;
+      font-family: var(--mono, monospace);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .payload-card strong {
+      display: block;
+      margin-bottom: 1rem;
+      color: #101217 !important;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      line-height: 1;
+    }
+
+    .payload-card h3 {
+      color: #101217 !important;
+    }
+
+    .payload-card p {
+      color: #505860 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       TECHNOLOGY TAGS
+       ------------------------------------------------------------ */
+
+    .tag-cloud span {
+      color: #101217 !important;
+      background: #ffffff !important;
+      border-color: #8b9299 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       BUTTON
+       ------------------------------------------------------------ */
+
+    .section.white .button,
+    .section.white .button:link,
+    .section.white .button:visited {
+      color: #ffffff !important;
+      background: #101318 !important;
+      border-color: #101318 !important;
+    }
+
+    .section.white .button:hover,
+    .section.white .button:focus-visible {
+      color: #101318 !important;
+      background: #ffffff !important;
+      border-color: #101318 !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       FOOTER
+       ------------------------------------------------------------ */
+
+    .site-footer {
+      color: #ffffff !important;
+      background: #050608 !important;
+    }
+
+    .site-footer p,
+    .site-footer a,
+    .site-footer a:link,
+    .site-footer a:visited {
+      color: #ffffff !important;
+    }
+
+
+    /* ------------------------------------------------------------
+       RESPONSIVE
+       ------------------------------------------------------------ */
+
+    @media (max-width: 900px) {
+      .drone-media {
+        grid-template-columns: 1fr;
+      }
+
+      .payload-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .drone-media-card.primary img,
+      .drone-media-card.secondary img {
+        height: auto;
+        min-height: 0;
+        max-height: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">
+    Skip to content
+  </a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a
+        class="brand"
+        href="../index.html"
+        aria-label="Srividya Srinivas home"
+      >
+        <span class="brand-mark">
+          SS
+        </span>
+
+        SRIVIDYA SRINIVAS
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        MENU
+      </button>
+
+      <nav
+        class="main-nav"
+        id="main-nav"
+        aria-label="Primary navigation"
+      >
+        <a href="../index.html">
+          Home
+        </a>
+
+        <a href="../about.html">
+          Experience
+        </a>
+
+        <div class="nav-group">
+          <button
+            class="nav-trigger"
+            type="button"
+            aria-expanded="false"
+          >
+            Projects
+          </button>
+
+          <div class="dropdown">
+            <a href="../projects.html">
+            All projects
+            </a>
+
+            <a href="pressure-washing-drone.html" aria-current="page">
+             Pressure-washing drone
+             </a>
+
+            <a href="ros2-patrol.html">
+            ROS 2 patrol robot
+            </a>
+
+            <a href="mars-rover.html">
+            Odyssey Mars Rover
+            </a>
+
+            <a href="quadruped.html">
+            Quadruped robot
+            </a>
+
+            <a href="brain-registration.html">
+            Brain MRI registration
+            </a>
+            </div>
+        </div>
+
+        <a href="../research.html">
+          Research
+        </a>
+
+        <a href="../resume.html">
+          Resume
+        </a>
+
+        <a href="../contact.html">
+          Contact
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="main">
+
+    <!-- =======================================================
+         HERO
+         ======================================================= -->
+
+    <section class="project-hero">
+      <div class="shell">
+
+        <div class="breadcrumb">
+          <a href="../projects.html">
+            Projects
+          </a>
+
+          /
+
+          Aerial robotics
+        </div>
+
+        <p class="eyebrow">
+          Aerial robotics · Mechatronics · System integration
+        </p>
+
+        <h1>
+          Pressure-Washing
+
+          <span>
+            Drone.
+          </span>
+        </h1>
+
+        <p class="project-lede">
+          An ongoing aerial cleaning platform integrating a 5 kg MTOW
+          multirotor, pressure-washing hardware, tethered fluid delivery,
+          Raspberry Pi computing, Pixhawk flight control, camera and
+          LiDAR sensing, and remotely controlled washer actuation.
+        </p>
+
+
+        <!-- META -->
+
+        <div class="project-meta">
+
+          <div class="meta-cell">
+            <span>
+              Role
+            </span>
+
+            <strong>
+              Mechatronics and multisensor integration
+            </strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>
+              Platform
+            </span>
+
+            <strong>
+              X650 multirotor · Pixhawk 2.4.8
+            </strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>
+              Research
+            </span>
+
+            <strong>
+              Creative Machines Lab · Columbia
+            </strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>
+              Status
+            </span>
+
+            <strong>
+              Prototype testing and sensing development
+            </strong>
+          </div>
+
+        </div>
+
+
+        <!-- MEDIA -->
+
+        <div class="drone-media">
+
+          <figure class="drone-media-card primary">
+            <img
+              src="../assets/images/pressure-washing-drone/drone%203.png"
+              alt="Pressure-washing drone system concept with onboard washer and external water supply"
+            >
+
+            <figcaption>
+              System visualization showing the intended aerial cleaning
+              configuration, including the drone-mounted Ryobi washer
+              and external water supply.
+            </figcaption>
+          </figure>
+
+
+          <div class="drone-media-column">
+
+            <figure class="drone-media-card secondary">
+              <img
+                src="../assets/images/pressure-washing-drone/drone_2.png"
+                alt="Drone propulsion and electronics integration during bench testing"
+              >
+
+              <figcaption>
+                Propulsion and electronics integration during motor
+                bring-up and controlled bench testing.
+              </figcaption>
+            </figure>
+
+
+            <figure class="drone-media-card secondary">
+              <img
+                src="../assets/images/pressure-washing-drone/drone_image.png"
+                alt="Assembled multirotor prototype"
+              >
+
+              <figcaption>
+                Integrated multirotor prepared for flight-system
+                calibration and controlled testing.
+              </figcaption>
+            </figure>
+
+          </div>
+
+        </div>
+
+
+        <!-- ARCHITECTURE -->
+
+        <div class="project-visual">
+          <div class="architecture">
+
+            <div class="node">
+              <small>
+                01 / FLY
+              </small>
+
+              <div>
+                <strong>
+                  Flight Platform
+                </strong>
+
+                <p>
+                  Multirotor propulsion, Pixhawk flight control,
+                  radio control, ESCs, and vehicle power.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="arrow">
+              →
+            </div>
+
+
+            <div class="node">
+              <small>
+                02 / CLEAN
+              </small>
+
+              <div>
+                <strong>
+                  Washer Payload
+                </strong>
+
+                <p>
+                  Ryobi washer, trigger actuation, fluid delivery,
+                  siphon line, and transfer hardware.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="arrow">
+              →
+            </div>
+
+
+            <div class="node">
+              <small>
+                03 / COMPUTE
+              </small>
+
+              <div>
+                <strong>
+                  Raspberry Pi
+                </strong>
+
+                <p>
+                  MAVLink telemetry, sensor logging, perception,
+                  and future autonomy.
+                </p>
+              </div>
+            </div>
+
+
+            <div class="arrow">
+              →
+            </div>
+
+
+            <div class="node">
+              <small>
+                04 / SENSE
+              </small>
+
+              <div>
+                <strong>
+                  Camera + LiDAR
+                </strong>
+
+                <p>
+                  Wall-distance estimation and facade-relative
+                  perception.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =======================================================
+         CASE STUDY
+         ======================================================= -->
+
+    <section class="section white">
+
+      <div class="shell case-layout">
+
+        <!-- LEFT NAVIGATION -->
+
+        <nav
+          class="case-nav"
+          aria-label="Case study sections"
+        >
+          <a href="#system">
+            01 System
+          </a>
+
+          <a href="#role">
+            02 My role
+          </a>
+
+          <a href="#payload">
+            03 Payload
+          </a>
+
+          <a href="#power">
+            04 Power
+          </a>
+
+          <a href="#fluid">
+            05 Fluid analysis
+          </a>
+
+          <a href="#testing">
+            06 Testing
+          </a>
+
+          <a href="#sensing">
+            07 Sensing
+          </a>
+
+          <a href="#current">
+            08 Current work
+          </a>
+
+          <a href="#technologies">
+            09 Technologies
+          </a>
+        </nav>
+
+
+        <!-- MAIN CONTENT -->
+
+        <div class="case-content">
+
+
+          <!-- ===================================================
+               01 SYSTEM
+               =================================================== -->
+
+          <section id="system">
+
+            <p class="eyebrow">
+              01 / System
+            </p>
+
+            <h2>
+              A flying robot built around propulsion, fluid delivery,
+              sensing, and control.
+            </h2>
+
+            <p>
+              Cleaning a building facade requires more than mounting a
+              pressure washer beneath a drone. The platform must remain
+              within a strict mass budget, deliver water and power safely,
+              maintain stable flight near a wall, activate the washer
+              remotely, and eventually estimate its position relative to
+              the facade.
+            </p>
+
+            <p>
+              The system therefore combines flight hardware, a cleaning
+              payload, onboard computing, communication interfaces, and
+              environmental sensing into one tightly constrained
+              mechatronic platform.
+            </p>
+
+
+            <div class="fact-grid">
+
+              <div class="fact">
+                <span>
+                  Flight
+                </span>
+
+                <strong>
+                  X650 multirotor + Pixhawk
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Cleaning
+                </span>
+
+                <strong>
+                  Ryobi 18 V washer
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Compute
+                </span>
+
+                <strong>
+                  Raspberry Pi 4
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Perception
+                </span>
+
+                <strong>
+                  Camera + LiDAR
+                </strong>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               02 MY ROLE
+               =================================================== -->
+
+          <section id="role">
+
+            <p class="eyebrow">
+              02 / My Role
+            </p>
+
+            <h2>
+              Mechatronics integration across flight, payload,
+              sensing, and testing.
+            </h2>
+
+            <p>
+              My work focused on bringing the physical and computational
+              subsystems together into a testable robotic platform.
+            </p>
+
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <span>
+                  Integrate
+                </span>
+
+                <div>
+                  <h3>
+                    Connect flight, compute, payload, and sensing.
+                  </h3>
+
+                  <p>
+                    Integrated the Pixhawk flight controller,
+                    Raspberry Pi, camera and LiDAR sensing,
+                    propulsion components, payload electronics,
+                    and washer actuation hardware.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Evaluate
+                </span>
+
+                <div>
+                  <h3>
+                    Compare payload architectures.
+                  </h3>
+
+                  <p>
+                    Evaluated onboard and tethered pressure-washing
+                    architectures against the platform's 5 kg maximum
+                    takeoff mass.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Characterize
+                </span>
+
+                <div>
+                  <h3>
+                    Measure the washer power path.
+                  </h3>
+
+                  <p>
+                    Characterized the Ryobi washer startup demand,
+                    including the approximately 25 A surge and the
+                    limitations of the available bench supply.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Debug
+                </span>
+
+                <div>
+                  <h3>
+                    Isolate failures before flight testing.
+                  </h3>
+
+                  <p>
+                    Debugged camera and LiDAR alignment,
+                    reflective-surface sensing, serial communication,
+                    electrical interfaces, and integrated subsystem
+                    behavior.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               03 PAYLOAD
+               =================================================== -->
+
+          <section id="payload">
+
+            <p class="eyebrow">
+              03 / Payload Architectures
+            </p>
+
+            <h2>
+              Compare mass, control, and tethering tradeoffs before
+              flight.
+            </h2>
+
+            <p>
+              Two pressure-washing configurations were evaluated. One
+              places the cordless Ryobi washer onboard the aircraft and
+              draws water through a lighter siphon line. The second keeps
+              the pressure washer on the ground and sends pressurized
+              water to the aircraft through a heavier tether.
+            </p>
+
+
+            <div class="payload-grid">
+
+              <article class="payload-card">
+                <span>
+                  Configuration A
+                </span>
+
+                <h3>
+                  Onboard washer
+                </h3>
+
+                <strong>
+                  4.52 kg
+                </strong>
+
+                <p>
+                  Places the Ryobi washer on the aircraft and uses a
+                  siphon line from the ground. This reduces
+                  high-pressure hose mass but adds washer and battery
+                  mass directly to the drone.
+                </p>
+              </article>
+
+
+              <article class="payload-card">
+                <span>
+                  Configuration B
+                </span>
+
+                <h3>
+                  Ground washer
+                </h3>
+
+                <strong>
+                  4.05 kg
+                </strong>
+
+                <p>
+                  Keeps the pressure washer on the ground and uses a
+                  high-pressure tether. The aircraft remains lighter,
+                  but hose mass and tether forces increase as operating
+                  height grows.
+                </p>
+              </article>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               04 POWER
+               =================================================== -->
+
+          <section id="power">
+
+            <p class="eyebrow">
+              04 / Power and Actuation
+            </p>
+
+            <h2>
+              Manage startup current without losing remote control.
+            </h2>
+
+            <p>
+              The 18 V Ryobi washer produced an approximately 25 A
+              startup demand, exceeding the available 12.55 A
+              bench-supply limit.
+            </p>
+
+            <p>
+              This required separating the washer's high-current power
+              path from its low-power control interface and selecting
+              switching hardware with sufficient current margin.
+            </p>
+
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <span>
+                  Measure
+                </span>
+
+                <div>
+                  <h3>
+                    Characterize startup current.
+                  </h3>
+
+                  <p>
+                    Measured washer startup behavior rather than sizing
+                    the electrical interface from nominal current alone.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Switch
+                </span>
+
+                <div>
+                  <h3>
+                    Separate control from high-current power.
+                  </h3>
+
+                  <p>
+                    Developed a relay-based control interface so the
+                    washer could be commanded without routing its
+                    high-current path through the flight computer.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Actuate
+                </span>
+
+                <div>
+                  <h3>
+                    Remotely operate the trigger.
+                  </h3>
+
+                  <p>
+                    Used a servo-operated mechanism to pull the washer
+                    trigger while keeping flight and cleaning commands
+                    independent.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               05 FLUID
+               =================================================== -->
+
+          <section id="fluid">
+
+            <p class="eyebrow">
+              05 / Fluid and Mass Analysis
+            </p>
+
+            <h2>
+              Every additional foot of hose changes the flight
+              problem.
+            </h2>
+
+            <p>
+              Fluid-line selection considered pressure loss, water mass,
+              hose mass, operating height, and the resulting load on the
+              aircraft.
+            </p>
+
+            <p>
+              A 1/4-inch fluid line provides a lightweight option for
+              the onboard washer architecture, while the ground-washer
+              configuration requires substantially heavier high-pressure
+              hose.
+            </p>
+
+
+            <div class="fact-grid">
+
+              <div class="fact">
+                <span>
+                  Lightweight line
+                </span>
+
+                <strong>
+                  1/4 inch
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Estimated loss
+                </span>
+
+                <strong>
+                  ≈ 0.576 PSI / ft
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Water mass
+                </span>
+
+                <strong>
+                  ≈ 16.33 g / ft
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  High-pressure hose
+                </span>
+
+                <strong>
+                  ≈ 109 g / ft
+                </strong>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               06 TESTING
+               =================================================== -->
+
+          <section id="testing">
+
+            <p class="eyebrow">
+              06 / Prototype Testing
+            </p>
+
+            <h2>
+              Validate subsystems before combining them in flight.
+            </h2>
+
+            <p>
+              Testing progressed from individual electrical and
+              mechanical interfaces to propulsion bring-up and
+              controlled indoor flight.
+            </p>
+
+            <p>
+              The first indoor lift test confirmed sufficient thrust
+              for the assembled platform. Payload flight, outdoor
+              operation, and autonomous cleaning remain under
+              development.
+            </p>
+
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <span>
+                  Bench
+                </span>
+
+                <div>
+                  <h3>
+                    Electrical integration.
+                  </h3>
+
+                  <p>
+                    Checked power distribution, receiver behavior,
+                    actuator interfaces, flight-controller
+                    communication, and washer control.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Propulsion
+                </span>
+
+                <div>
+                  <h3>
+                    Motor bring-up.
+                  </h3>
+
+                  <p>
+                    Verified ESC calibration, motor response, command
+                    direction, and propulsion-system behavior.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Flight
+                </span>
+
+                <div>
+                  <h3>
+                    Indoor lift test.
+                  </h3>
+
+                  <p>
+                    Completed an initial controlled flight to verify
+                    adequate lift before advancing to payload testing.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               07 SENSING
+               =================================================== -->
+
+          <section id="sensing">
+
+            <p class="eyebrow">
+              07 / Raspberry Pi and Sensing
+            </p>
+
+            <h2>
+              Build a perception layer above the flight controller.
+            </h2>
+
+            <p>
+              A Raspberry Pi 4 provides the onboard computing layer for
+              camera and LiDAR processing.
+            </p>
+
+            <p>
+              MAVLink communication with the Pixhawk was brought up over
+              USB serial at 115200 baud, with heartbeat and attitude
+              data used to verify the communication path and telemetry
+              flow.
+            </p>
+
+
+            <div class="fact-grid">
+
+              <div class="fact">
+                <span>
+                  Flight control
+                </span>
+
+                <strong>
+                  Pixhawk 2.4.8
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Companion compute
+                </span>
+
+                <strong>
+                  Raspberry Pi 4
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Communication
+                </span>
+
+                <strong>
+                  MAVLink · 115200 baud
+                </strong>
+              </div>
+
+
+              <div class="fact">
+                <span>
+                  Perception
+                </span>
+
+                <strong>
+                  Camera + LiDAR
+                </strong>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               08 CURRENT
+               =================================================== -->
+
+          <section id="current">
+
+            <p class="eyebrow">
+              08 / Current Work
+            </p>
+
+            <h2>
+              Move from integrated hardware toward sensor-aware
+              flight.
+            </h2>
+
+            <p>
+              The project is ongoing. Current work focuses on reliable
+              sensing, synchronized data collection, calibration, and
+              establishing the state estimates needed for controlled
+              operation near a building facade.
+            </p>
+
+
+            <div class="timeline">
+
+              <div class="timeline-item">
+                <span>
+                  Now
+                </span>
+
+                <div>
+                  <h3>
+                    Sensor bring-up and calibration.
+                  </h3>
+
+                  <p>
+                    Camera and LiDAR bring-up, extrinsic alignment,
+                    reflective-surface sensing investigation, and
+                    reliable timestamped data collection.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Next
+                </span>
+
+                <div>
+                  <h3>
+                    Facade-relative state estimation.
+                  </h3>
+
+                  <p>
+                    Fuse camera, LiDAR, and flight-state data for
+                    wall-distance estimation and closed-loop
+                    positioning.
+                  </p>
+                </div>
+              </div>
+
+
+              <div class="timeline-item">
+                <span>
+                  Later
+                </span>
+
+                <div>
+                  <h3>
+                    Autonomous cleaning behavior.
+                  </h3>
+
+                  <p>
+                    Develop recoil and tether-disturbance compensation,
+                    standoff control, and cleaning-coverage perception.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ===================================================
+               09 TECHNOLOGIES
+               =================================================== -->
+
+          <section id="technologies">
+
+            <p class="eyebrow">
+              09 / Technologies
+            </p>
+
+            <h2>
+              Hardware, communication, sensing, and system integration.
+            </h2>
+
+            <div class="tag-cloud">
+              <span>Pixhawk 2.4.8</span>
+              <span>ArduPilot</span>
+              <span>Raspberry Pi 4</span>
+              <span>MAVLink</span>
+              <span>Python</span>
+              <span>Camera</span>
+              <span>LiDAR</span>
+              <span>PWM</span>
+              <span>UART / Serial</span>
+              <span>Relays</span>
+              <span>BLDC Motors</span>
+              <span>ESCs</span>
+              <span>Ryobi 18 V Washer</span>
+              <span>Fluid Delivery</span>
+              <span>Power Electronics</span>
+              <span>System Integration</span>
+              <span>Bench Testing</span>
+            </div>
+
+
+            <a
+              class="button"
+              href="../projects.html"
+            >
+              Back to all projects ↗
+            </a>
+
+          </section>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+
+      <p>
+        © <span data-year></span> SRIVIDYA SRINIVAS
+      </p>
+
+      <div class="footer-links">
+        <a href="../projects.html">
+          All projects
+        </a>
+
+        <a href="mailto:ss7703@columbia.edu">
+          Email
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

@@ -1,20 +1,705 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="About Srividya Srinivas, a robotics and mechatronics engineer at Columbia University.">
-  <title>About — Srividya Srinivas</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%230b57ff'/%3E%3Cpath d='M17 22h30v22H17zM25 16v6m14-6v6M23 31h4m10 0h4M25 38h14' stroke='white' stroke-width='4' fill='none'/%3E%3C/svg%3E">
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Experience and education of Srividya Srinivas, a robotics and mechatronics engineer at Columbia University."
+  >
+
+  <title>
+    Experience | Srividya Srinivas
+  </title>
+
   <link rel="stylesheet" href="assets/style.css">
+
+  <style>
+    .about-shell {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .about-hero {
+      padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+      border-bottom: 1px solid #d6d9de;
+      background: #f5f6f8;
+    }
+
+    .about-role {
+      margin: 0 0 1.75rem;
+      color: #101217;
+      font-family: monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .about-title {
+      width: 100%;
+      margin: 0;
+      color: #101217;
+      font-size: clamp(3.8rem, 6.5vw, 7rem);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+    }
+
+    .about-copy {
+      width: 100%;
+      margin-top: 2rem;
+    }
+
+    .about-copy p {
+      width: 100%;
+      margin: 0;
+      color: #3d4655;
+      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+      line-height: 1.75;
+    }
+
+    .about-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 2rem;
+    }
+
+    .about-section {
+      padding: clamp(5rem, 8vw, 8rem) 0;
+      border-bottom: 1px solid #d6d9de;
+    }
+
+    .about-section.white {
+      background: #ffffff;
+    }
+
+    .about-section.gray {
+      background: #f5f6f8;
+    }
+
+    .about-section-heading {
+      margin-bottom: clamp(3rem, 6vw, 5rem);
+    }
+
+    .about-eyebrow {
+      margin: 0 0 1.5rem;
+      color: #40516a;
+      font-family: monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .about-section-heading h2 {
+      max-width: 850px;
+      margin: 0;
+      color: #101217;
+      font-size: clamp(2.8rem, 5vw, 5.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .experience-list {
+      border-top: 1px solid #cfd4dc;
+    }
+
+    .experience-entry {
+      display: grid;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: clamp(2rem, 5vw, 5rem);
+      padding: 2.75rem 0;
+      border-bottom: 1px solid #cfd4dc;
+    }
+
+    .experience-date {
+      margin: 0;
+      color: #566174;
+      font-family: monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .experience-content h3 {
+      margin: 0;
+      color: #101217;
+      font-size: clamp(1.45rem, 2.4vw, 2.15rem);
+      line-height: 1.2;
+    }
+
+    .experience-organization {
+      margin: 0.55rem 0 0;
+      color: #40516a;
+      font-family: monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .experience-professor {
+      margin: 0.55rem 0 0;
+      color: #101217;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .experience-description {
+      max-width: 800px;
+      margin: 1.1rem 0 0;
+      color: #475161;
+      font-size: 1.02rem;
+      line-height: 1.75;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 1.25rem;
+    }
+
+    .about-tags span {
+      padding: 0.5rem 0.7rem;
+      border: 1px solid #cfd4dc;
+      color: #303947;
+      font-family: monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .education-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      border-top: 1px solid #cfd4dc;
+      border-left: 1px solid #cfd4dc;
+    }
+
+    .education-card {
+      padding: clamp(2rem, 4vw, 3.25rem);
+      border-right: 1px solid #cfd4dc;
+      border-bottom: 1px solid #cfd4dc;
+    }
+
+    .education-date {
+      margin: 0 0 1.5rem;
+      color: #566174;
+      font-family: monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .education-card h3 {
+      margin: 0;
+      color: #101217;
+      font-size: clamp(1.55rem, 2.5vw, 2.25rem);
+      line-height: 1.18;
+    }
+
+    .education-school {
+      margin: 0.75rem 0 0;
+      color: #40516a;
+      font-family: monospace;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .education-focus {
+      margin: 1.35rem 0 0;
+      color: #475161;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .coursework-label {
+      display: block;
+      margin-top: 1.5rem;
+      color: #101217;
+      font-family: monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .coursework {
+      margin: 0.65rem 0 0;
+      color: #566174;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 700px) {
+      .about-shell {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .about-title {
+        font-size: clamp(3.25rem, 15vw, 5rem);
+      }
+
+      .experience-entry {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .education-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-  <header class="site-header"><div class="nav-shell"><a class="brand" href="index.html"><span class="brand-mark">SS</span> SRIVIDYA SRINIVAS</a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav">MENU</button><nav class="main-nav" id="main-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="about.html" aria-current="page">About</a><div class="nav-group"><button class="nav-trigger" type="button" aria-expanded="false">Projects</button><div class="dropdown"><a href="projects.html">All projects</a><a href="projects/docksight.html">DockSight</a><a href="projects/pressure-washing-drone.html">Pressure-washing drone</a><a href="projects/ros2-patrol.html">ROS 2 patrol robot</a></div></div><a href="research.html">Research</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></nav></div></header>
+  <a class="skip-link" href="#main">
+    Skip to content
+  </a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">SS</span>
+        <span>SRIVIDYA SRINIVAS</span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        MENU
+      </button>
+
+      <nav
+        class="main-nav"
+        id="main-nav"
+        aria-label="Primary navigation"
+      >
+        <a href="index.html">
+          Home
+        </a>
+
+        <a href="about.html" aria-current="page">
+          Experience
+        </a>
+
+        <div class="nav-group">
+          <button
+            class="nav-trigger"
+            type="button"
+            aria-expanded="false"
+          >
+            Projects
+          </button>
+
+          <div class="dropdown">
+            <a href="projects.html">
+              All projects
+            </a>
+
+            <a href="projects/pressure-washing-drone.html">
+              Pressure-washing drone
+            </a>
+
+            <a href="projects/ros2-patrol.html">
+              ROS 2 patrol robot
+            </a>
+
+            <a href="projects/mars-rover.html">
+              Odyssey Mars Rover
+            </a>
+
+            <a href="projects/quadruped.html">
+              Quadruped robot
+            </a>
+
+            <a href="projects/brain-registration.html">
+              Brain MRI registration
+            </a>
+          </div>
+        </div>
+
+        <a href="research.html">
+          Research
+        </a>
+
+        <a href="resume.html">
+          Resume
+        </a>
+
+        <a href="contact.html">
+          Contact
+        </a>
+      </nav>
+    </div>
+  </header>
+
   <main id="main">
-    <section class="page-hero"><div class="shell page-hero-grid"><div><p class="eyebrow">About</p><h1 class="page-title">I work at the boundaries between disciplines.</h1></div><p>Robotics is where my electronics foundation, mechanical-systems training, controls work, and love of building finally became one practice.</p></div></section>
-    <section class="section white"><div class="shell identity-grid"><aside class="identity-card"><div class="monogram">SS</div><dl><div><dt>BASE</dt><dd>NEW YORK</dd></div><div><dt>EDUCATION</dt><dd>COLUMBIA</dd></div><div><dt>TRACK</dt><dd>ROBOTICS + CONTROLS</dd></div><div><dt>ORIGIN</dt><dd>ECE</dd></div></dl></aside><div class="identity-copy"><p class="eyebrow">My engineering path</p><h2>From circuits to complete robotic systems.</h2><p>I began in electronics and communication engineering, where I learned to think in sensors, interfaces, embedded computing, and signals. At Columbia, I expanded that foundation into mechanical systems, robotics, controls, MEMS, and autonomy.</p><p>Today, my strongest work sits across the whole robot stack. I’m comfortable moving from a camera or transducer, through embedded software and state estimation, into control logic, motors, mechanisms, power, and system-level testing.</p><p>That makes me especially interested in robotics and mechatronics integration, validation, controls, sensing, and physical-AI roles—work where reliability depends on understanding the entire system rather than one isolated component.</p></div></div></section>
-    <section class="section"><div class="shell"><div class="section-head"><div><p class="eyebrow">Foundation</p><h2>Education & experience.</h2></div><p>A research-and-build path spanning university laboratories, teaching, embedded vision, controls, and student engineering leadership.</p></div><div class="resume-section"><h2>Education</h2><div><div class="resume-item"><h3>Columbia University</h3><p>M.S. Mechanical Engineering · Robotics & Controls</p></div><div class="resume-item"><h3>Amrita Vishwa Vidyapeetham</h3><p>B.Tech Electronics & Communication Engineering</p></div></div></div><div class="resume-section"><h2>Research</h2><div><div class="resume-item"><h3>Tepolé Lab · Columbia University</h3><p>Physics-informed neural ODE methods for 3D brain registration.</p></div><div class="resume-item"><h3>Creative Machines Lab · Columbia University</h3><p>Mechatronics and system integration for an aerial pressure-washing platform.</p></div><div class="resume-item"><h3>IISc / ARTPARK</h3><p>Embedded vision and control research leading to IEEE work.</p></div></div></div><div class="resume-section"><h2>Teaching</h2><div><div class="resume-item"><h3>MEMS Sensors & Systems</h3><p>Teaching and course support across laboratory kits, grading, office hours, and student debugging.</p></div></div></div></div></section>
-    <section class="signal-band"><div class="shell"><h2>Curious about how the systems were built?</h2><a class="button" href="projects.html">See the project archive ↗</a></div></section>
+    <section class="about-hero">
+      <div class="about-shell">
+        <p class="about-role">
+          Robotics and Mechatronics Engineer
+        </p>
+
+        <h1 class="about-title">
+          Robotics in the real world.
+        </h1>
+
+        <div class="about-copy">
+          <p>
+            I am pursuing a Master of Science in Mechanical
+            Engineering at Columbia University, specializing in
+            Robotics and Controls. With a background in Electronics
+            and Communication Engineering, I build aerial robots,
+            autonomous navigation systems, embedded sensing platforms,
+            control systems, and integrated hardware-software systems.
+          </p>
+        </div>
+
+        <div class="about-actions">
+          <a class="button" href="projects.html">
+            View my work ↗
+          </a>
+
+          <a class="button" href="resume.html">
+            View resume ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section white">
+      <div class="about-shell">
+        <div class="about-section-heading">
+          <p class="about-eyebrow">
+            // EXPERIENCE
+          </p>
+
+          <h2>
+            Research, teaching, and engineering.
+          </h2>
+        </div>
+
+        <div class="experience-list">
+          <article class="experience-entry">
+            <p class="experience-date">
+              MAY 2026 - PRESENT
+            </p>
+
+            <div class="experience-content">
+              <h3>
+                Graduate Researcher
+              </h3>
+
+              <p class="experience-organization">
+                Creative Machines Lab, Columbia University
+              </p>
+
+              <p class="experience-description">
+                Developing and integrating a pressure-washing aerial
+                robot for facade cleaning. The system combines Pixhawk
+                flight control, Raspberry Pi computing, camera and
+                LiDAR sensing, propulsion, washer actuation, payload
+                electronics, and tethered fluid delivery.
+              </p>
+
+              <div class="about-tags">
+                <span>Aerial Robotics</span>
+                <span>Pixhawk</span>
+                <span>Raspberry Pi</span>
+                <span>LiDAR</span>
+                <span>System Integration</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry">
+            <p class="experience-date">
+              SEP 2026 - PRESENT
+            </p>
+
+            <div class="experience-content">
+              <h3>
+                Enhanced Teaching Assistant
+              </h3>
+
+              <p class="experience-organization">
+                Columbia University
+              </p>
+
+              <p class="experience-professor">
+                Professor P. James Schuck
+              </p>
+
+              <p class="experience-description">
+                Supporting instruction and student learning in MEMS
+                and micro/nanoscale engineering, including technical
+                explanation, course support, assignment evaluation,
+                and student guidance.
+              </p>
+
+              <div class="about-tags">
+                <span>MEMS</span>
+                <span>Micro/Nanotechnology</span>
+                <span>Teaching</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry">
+            <p class="experience-date">
+              JAN 2026 - MAY 2026
+            </p>
+
+            <div class="experience-content">
+              <h3>
+                Teaching Assistant, Signals, Sensors and Systems
+              </h3>
+
+              <p class="experience-organization">
+                Columbia University
+              </p>
+
+              <p class="experience-professor">
+                Professor John P. Hilton
+              </p>
+
+              <p class="experience-description">
+                Served as the sole teaching assistant for a
+                40-student laboratory course covering sensor
+                characterization, ADC calibration, signal
+                conditioning, electrical noise, circuit testing,
+                measurement uncertainty, Python-based data analysis,
+                and experimental validation.
+              </p>
+
+              <div class="about-tags">
+                <span>Sensors</span>
+                <span>Instrumentation</span>
+                <span>Experimental Validation</span>
+                <span>Python</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry">
+            <p class="experience-date">
+              SEP 2024 - JUN 2025
+            </p>
+
+            <div class="experience-content">
+              <h3>
+                Undergraduate Thesis Researcher
+              </h3>
+
+              <p class="experience-organization">
+                Indian Institute of Science
+              </p>
+
+              <p class="experience-description">
+                Developed and tested an embedded vision and control
+                system integrating power electronics, motor control,
+                ESP32-CAM image acquisition, and YOLOv8 perception.
+                The work contributed to a publication at IEEE ICCECE
+                2025.
+              </p>
+
+              <div class="about-tags">
+                <span>Embedded Vision</span>
+                <span>YOLOv8</span>
+                <span>Edge ML</span>
+                <span>Electromechanical Control</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry">
+            <p class="experience-date">
+              JUN 2024 - JUL 2024
+            </p>
+
+            <div class="experience-content">
+              <h3>
+                Robotics Intern
+              </h3>
+
+              <p class="experience-organization">
+                ARTPARK AI and Robotics Technology Park at IISc
+              </p>
+
+              <p class="experience-description">
+                Integrated LiDAR, IMU, onboard computing, perception,
+                localization, ROS 2, and Nav2 on a physical autonomous
+                robot. Tested waypoint execution, recovery behavior,
+                obstacle-aware patrol, and real-time visual threat
+                detection.
+              </p>
+
+              <div class="about-tags">
+                <span>ROS 2</span>
+                <span>Nav2</span>
+                <span>LiDAR</span>
+                <span>Localization</span>
+                <span>Robot Integration</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="experience-entry">
+            <p class="experience-date">
+              SEP 2023 - SEP 2024
+            </p>
+
+            <div class="experience-content">
+              <h3>
+                Founder and Team Lead
+              </h3>
+
+              <p class="experience-organization">
+                Team Odyssey, Mars Rover Team
+              </p>
+
+              <p class="experience-description">
+                Founded and led a 30-member rover team integrating
+                mobility, perception, manipulation, embedded control,
+                power distribution, communications, and mechanical
+                systems for the Indian Space Research Organisation
+                Robotics Challenge.
+              </p>
+
+              <div class="about-tags">
+                <span>Robotics</span>
+                <span>Leadership</span>
+                <span>Power Distribution</span>
+                <span>System Integration</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about-section gray">
+      <div class="about-shell">
+        <div class="about-section-heading">
+          <p class="about-eyebrow">
+            // EDUCATION
+          </p>
+
+          <h2>
+            Academic background.
+          </h2>
+        </div>
+
+        <div class="education-grid">
+          <article class="education-card">
+            <p class="education-date">
+              AUG 2025 - DEC 2026
+            </p>
+
+            <h3>
+              Master of Science in Mechanical Engineering
+            </h3>
+
+            <p class="education-school">
+              Columbia University, New York
+            </p>
+
+            <p class="education-focus">
+              Robotics and Controls concentration with graduate work
+              in robotics, autonomous systems, embedded computing,
+              mechatronics, and feedback control.
+            </p>
+
+            <span class="coursework-label">
+              Selected coursework
+            </span>
+
+            <p class="coursework">
+              Introduction to Robotics, Applied Robotics, Robotics
+              Studio, Robot Learning, Industrial Automation,
+              Reinforcement Learning, Computational Aspects of
+              Robotics, Mechatronics and Embedded Microcomputer
+              Control, Model Predictive Control, and
+              Microelectromechanical Systems.
+            </p>
+          </article>
+
+          <article class="education-card">
+            <p class="education-date">
+              2021 - 2025
+            </p>
+
+            <h3>
+              Bachelor of Technology in Electronics and Communication
+              Engineering
+            </h3>
+
+            <p class="education-school">
+              Amrita Vishwa Vidyapeetham, Bengaluru
+            </p>
+
+            <p class="education-focus">
+              Built a foundation in electronics, embedded systems,
+              digital hardware, communication systems, and engineering
+              design before moving into robotics and mechatronics.
+            </p>
+
+            <span class="coursework-label">
+              Selected coursework
+            </span>
+
+            <p class="coursework">
+              Embedded Systems, FPGA, Electronic System-Level Design,
+              Communication Systems, Radio Frequency, Analog Circuits,
+              and Digital Circuits.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
   </main>
-  <footer class="site-footer"><div class="shell footer-grid"><p>© <span data-year></span> SRIVIDYA SRINIVAS</p><div class="footer-links"><a href="mailto:ss7703@columbia.edu">Email</a><a href="resume.html">Resume</a></div></div></footer><script src="assets/main.js"></script>
-</body></html>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>
+        © <span data-year></span> SRIVIDYA SRINIVAS
+      </p>
+
+      <div class="footer-links">
+        <a href="projects.html">
+          Projects
+        </a>
+
+        <a href="research.html">
+          Research
+        </a>
+
+        <a href="mailto:ss7703@columbia.edu">
+          Email
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/main.js"></script>
+</body>
+</html>

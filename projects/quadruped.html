@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Servo-based quadruped robot designed for physical gait prototyping, mechanical development, and actuator coordination."
+  >
+
+  <title>Servo-Based Quadruped Robot | Srividya Srinivas</title>
+
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <style>
+    .quadruped-media {
+      display: grid;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .quadruped-media-card {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: #0f1218;
+      overflow: hidden;
+    }
+
+    .quadruped-media-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 1000px;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .quadruped-media-card figcaption {
+      padding: 1rem;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">SS</span>
+        SRIVIDYA SRINIVAS
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        MENU
+      </button>
+
+      <nav
+        class="main-nav"
+        id="main-nav"
+        aria-label="Primary navigation"
+      >
+        <a href="../index.html">Home</a>
+        <a href="../about.html">Experience</a>
+
+        <div class="nav-group">
+          <button
+            class="nav-trigger"
+            type="button"
+            aria-expanded="false"
+          >
+            Projects
+          </button>
+
+          <div class="dropdown">
+            <a href="../projects.html">
+            All projects
+            </a>
+
+            <a href="pressure-washing-drone.html">
+            Pressure-washing drone
+            </a>
+
+            <a href="ros2-patrol.html" aria-current="page">
+            ROS 2 patrol robot
+            </a>
+
+            <a href="mars-rover.html">
+            Odyssey Mars Rover
+            </a>
+
+            <a href="quadruped.html">
+            Quadruped robot
+            </a>
+
+            <a href="brain-registration.html">
+            Brain MRI registration
+            </a>
+          </div>
+        </div>
+
+        <a href="../research.html">Research</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="project-hero">
+      <div class="shell">
+        <div class="breadcrumb">
+          <a href="../projects.html">Projects</a>
+          /
+          Legged robotics
+        </div>
+
+        <p class="eyebrow">
+          Legged robotics · Hardware prototyping
+        </p>
+
+        <h1>
+          Servo-Based Quadruped Robot
+          <span>Physical gait prototyping and actuator coordination.</span>
+        </h1>
+
+        <p class="project-lede">
+          A physical 8-DOF quadruped platform developed to study
+          servo-based locomotion, mechanical alignment, gait timing,
+          weight distribution, and the gap between simulated motion
+          and real hardware behavior.
+        </p>
+
+        <div class="project-meta">
+          <div class="meta-cell">
+            <span>Role</span>
+            <strong>Mechanical design and controls</strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>Platform</span>
+            <strong>2-DOF per leg</strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>Compute</span>
+            <strong>Raspberry Pi</strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>Actuation</span>
+            <strong>8 LX-16A servos</strong>
+          </div>
+        </div>
+
+        <div class="quadruped-media">
+          <figure class="quadruped-media-card">
+            <img
+              src="../assets/images/quadruped/quadrapede.jpeg"
+              alt="Physical quadruped robot and mechanical CAD model"
+            >
+
+            <figcaption>
+              Physical quadruped platform and mechanical CAD development
+            </figcaption>
+          </figure>
+
+          <figure class="quadruped-media-card">
+            <img
+              src="../assets/images/quadruped/quadrapede1.jpeg"
+              alt="Quadruped robot hardware and leg assembly"
+              loading="lazy"
+            >
+
+            <figcaption>
+              Servo-driven leg structure and physical hardware assembly
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="project-visual">
+          <div class="architecture">
+            <div class="node">
+              <small>01 / DESIGN</small>
+
+              <div>
+                <strong>Mechanical CAD</strong>
+
+                <p>
+                  Define the body, leg geometry, mounts, and actuator placement.
+                </p>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+              <small>02 / COMMAND</small>
+
+              <div>
+                <strong>Raspberry Pi</strong>
+
+                <p>
+                  Generate coordinated position commands for each leg.
+                </p>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+              <small>03 / ACTUATE</small>
+
+              <div>
+                <strong>LX-16A Servos</strong>
+
+                <p>
+                  Drive eight joints across four 2-DOF legs.
+                </p>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+              <small>04 / TEST</small>
+
+              <div>
+                <strong>Physical Gaits</strong>
+
+                <p>
+                  Evaluate timing, traction, balance, and hardware behavior.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="shell case-layout">
+        <nav
+          class="case-nav"
+          aria-label="Case study sections"
+        >
+          <a href="#problem">01 Problem</a>
+          <a href="#design">02 Mechanical design</a>
+          <a href="#control">03 Control system</a>
+          <a href="#gait">04 Gait development</a>
+          <a href="#testing">05 Hardware testing</a>
+          <a href="#lessons">06 Lessons</a>
+          <a href="#technologies">07 Technologies</a>
+        </nav>
+
+        <div class="case-content">
+          <section id="problem">
+            <p class="eyebrow">01 / Problem</p>
+
+            <h2>
+              Stable walking requires more than moving individual servos.
+            </h2>
+
+            <p>
+              Legged locomotion depends on coordinated actuator motion,
+              stable ground contact, appropriate weight distribution,
+              mechanical alignment, and precise gait timing.
+            </p>
+
+            <p>
+              These challenges become more visible on physical hardware.
+              Small errors in servo position, foot placement, structural
+              alignment, or timing can cause slipping, body rotation,
+              unstable contact, or complete loss of balance.
+            </p>
+          </section>
+
+          <section id="design">
+            <p class="eyebrow">02 / Mechanical Design</p>
+
+            <h2>
+              A modular 2-DOF leg architecture.
+            </h2>
+
+            <p>
+              The robot uses four legs with two actuated joints per leg,
+              producing an 8-DOF platform. Custom CAD parts and
+              3D-printed servo mounts connect the actuators to the body
+              while maintaining a compact and repeatable leg structure.
+            </p>
+
+            <p>
+              The design was developed around the physical dimensions
+              and motion limits of the LX-16A servos. Joint placement,
+              link geometry, mounting alignment, wiring clearance, and
+              access to the electronics were considered during assembly.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>Legs</span>
+                <strong>Four</strong>
+              </div>
+
+              <div class="fact">
+                <span>Joints</span>
+                <strong>Two per leg</strong>
+              </div>
+
+              <div class="fact">
+                <span>Total Actuation</span>
+                <strong>8-DOF</strong>
+              </div>
+
+              <div class="fact">
+                <span>Fabrication</span>
+                <strong>CAD and 3D printing</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="control">
+            <p class="eyebrow">03 / Control System</p>
+
+            <h2>
+              Coordinated servo commands from a Raspberry Pi.
+            </h2>
+
+            <p>
+              A Raspberry Pi controls the LX-16A servo network using
+              Python. Each leg requires coordinated joint commands so
+              the body remains supported while the other legs move
+              through their gait phases.
+            </p>
+
+            <p>
+              The control structure focuses on repeatable servo
+              positioning, joint sequencing, motion timing, and
+              transitions between stance and swing phases.
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <span>Initialize</span>
+
+                <div>
+                  <h3>Establish known servo positions.</h3>
+
+                  <p>
+                    Move each joint into a defined starting configuration
+                    before beginning the gait sequence.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>Coordinate</span>
+
+                <div>
+                  <h3>Group joint motion by leg and gait phase.</h3>
+
+                  <p>
+                    Coordinate the hip and lower-leg servos so each foot
+                    follows a repeatable movement pattern.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>Sequence</span>
+
+                <div>
+                  <h3>Control stance and swing timing.</h3>
+
+                  <p>
+                    Maintain support using the stance legs while advancing
+                    the selected swing legs.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>Repeat</span>
+
+                <div>
+                  <h3>Loop the gait across all four legs.</h3>
+
+                  <p>
+                    Repeat the sequence while observing balance, traction,
+                    servo behavior, and body motion.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="gait">
+            <p class="eyebrow">04 / Gait Development</p>
+
+            <h2>
+              Turning joint sequences into forward motion.
+            </h2>
+
+            <p>
+              Initial gait sequences were developed to study how servo
+              timing and leg coordination affect physical locomotion.
+              The goal was not simply to move every joint, but to maintain
+              enough ground support for the robot to advance without
+              collapsing or rotating unexpectedly.
+            </p>
+
+            <p>
+              Testing focused on the relationship between step length,
+              stance duration, servo speed, body weight distribution,
+              and foot contact. These parameters were adjusted through
+              repeated physical trials.
+            </p>
+          </section>
+
+          <section id="testing">
+            <p class="eyebrow">05 / Hardware Testing</p>
+
+            <h2>
+              Real hardware exposed the limits of the first gait.
+            </h2>
+
+            <p>
+              The completed platform successfully executed coordinated
+              leg motions and provided a working testbed for physical
+              gait experiments. Early walking trials also revealed
+              slipping, limited stability, and sensitivity to mechanical
+              alignment.
+            </p>
+
+            <p>
+              These results showed that a gait that appears reasonable
+              as a sequence of servo positions may still perform poorly
+              when ground friction, structural compliance, wiring,
+              backlash, and the robot's center of mass are introduced.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>Demonstrated</span>
+                <strong>Coordinated leg motion</strong>
+              </div>
+
+              <div class="fact">
+                <span>Observed</span>
+                <strong>Foot slipping</strong>
+              </div>
+
+              <div class="fact">
+                <span>Constraint</span>
+                <strong>Weight distribution</strong>
+              </div>
+
+              <div class="fact">
+                <span>Outcome</span>
+                <strong>Working gait test platform</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="lessons">
+            <p class="eyebrow">06 / Iteration and Lessons</p>
+
+            <h2>
+              Locomotion performance is a system-level problem.
+            </h2>
+
+            <p>
+              The project demonstrated that mechanical geometry,
+              actuator behavior, control timing, foot design, and mass
+              distribution must be developed together.
+            </p>
+
+            <p>
+              The most important improvements identified for a future
+              version are higher-traction feet, better weight
+              distribution, more precise mechanical alignment, improved
+              cable management, and additional gait tuning based on
+              measured hardware behavior.
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <span>Traction</span>
+
+                <div>
+                  <h3>Improve foot contact.</h3>
+
+                  <p>
+                    Use higher-friction foot materials and more consistent
+                    contact geometry to reduce slipping.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>Balance</span>
+
+                <div>
+                  <h3>Refine mass placement.</h3>
+
+                  <p>
+                    Position the compute hardware and structural
+                    components closer to a stable center of mass.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>Timing</span>
+
+                <div>
+                  <h3>Tune gait transitions.</h3>
+
+                  <p>
+                    Adjust step timing and servo speed to maintain support
+                    throughout the gait cycle.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>Feedback</span>
+
+                <div>
+                  <h3>Add sensing in future iterations.</h3>
+
+                  <p>
+                    Joint, orientation, or contact feedback could support
+                    more adaptive locomotion than fixed command sequences.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="technologies">
+            <p class="eyebrow">07 / Technologies</p>
+
+            <h2>
+              Mechanical design, embedded control, and physical testing.
+            </h2>
+
+            <div class="tag-cloud">
+              <span>Raspberry Pi</span>
+              <span>Python</span>
+              <span>LX-16A Servos</span>
+              <span>Servo Control</span>
+              <span>Legged Robotics</span>
+              <span>Gait Prototyping</span>
+              <span>Mechanical CAD</span>
+              <span>3D Printing</span>
+              <span>Hardware Integration</span>
+              <span>Physical Testing</span>
+            </div>
+
+            <a
+              class="button"
+              href="../projects.html"
+            >
+              Back to all projects ↗
+            </a>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>
+        © <span data-year></span> SRIVIDYA SRINIVAS
+      </p>
+
+      <div class="footer-links">
+        <a href="../projects.html">All projects</a>
+        <a href="mailto:ss7703@columbia.edu">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>

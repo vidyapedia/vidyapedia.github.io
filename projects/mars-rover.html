@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Odyssey Mars Rover project led by Srividya Srinivas for the ISRO Robotics Challenge."
+  >
+
+  <title>Odyssey Mars Rover | Srividya Srinivas</title>
+
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">SS</span>
+        SRIVIDYA SRINIVAS
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        MENU
+      </button>
+
+      <nav
+        class="main-nav"
+        id="main-nav"
+        aria-label="Primary navigation"
+      >
+        <a href="../index.html">Home</a>
+        <a href="../about.html">Experience</a>
+
+        <div class="nav-group">
+          <button
+            class="nav-trigger"
+            type="button"
+            aria-expanded="false"
+          >
+            Projects
+          </button>
+
+          <div class="dropdown">
+            <a href="../projects.html">
+            All projects
+            </a>
+
+            <a href="pressure-washing-drone.html">
+            Pressure-washing drone
+            </a>
+
+            <a href="ros2-patrol.html" aria-current="page">
+            ROS 2 patrol robot
+            </a>
+
+            <a href="mars-rover.html">
+            Odyssey Mars Rover
+            </a>
+
+            <a href="quadruped.html">
+            Quadruped robot
+            </a>
+
+            <a href="brain-registration.html">
+            Brain MRI registration
+            </a>
+
+          </div>
+        </div>
+
+        <a href="../research.html">Research</a>
+        <a href="../resume.html">Resume</a>
+        <a href="../contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="project-hero">
+      <div class="shell">
+        <div class="breadcrumb">
+          <a href="../projects.html">Projects</a> / Mobile robotics
+        </div>
+
+        <p class="eyebrow">
+          Rover systems · Leadership · Integration
+        </p>
+
+        <h1>
+          Odyssey
+          <span>Mars Rover.</span>
+        </h1>
+
+        <p class="project-lede">
+          A multidisciplinary rover program for the Indian Space Research Organization Robotics Challenge,
+          combining uneven-terrain mobility, onboard perception, autonomous
+          navigation, sample manipulation, embedded electronics, and power
+          distribution.
+        </p>
+
+        <div class="project-meta">
+          <div class="meta-cell">
+            <span>Role</span>
+            <strong>Founder and Team Lead</strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>Team</span>
+            <strong>30 multidisciplinary members</strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>Competition</span>
+            <strong>Indian Space Research Organization- Robotics Challenge 2024</strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>Result</span>
+            <strong>Top 10 of IRoC-U 2024 </strong>
+          </div>
+        </div>
+
+        <section id="media" style="margin-top: 3rem;">
+          <p class="eyebrow">Project Media</p>
+
+          <h2
+            style="
+              margin: 0;
+              font-size: clamp(2rem, 4vw, 3.4rem);
+              line-height: 1;
+              letter-spacing: -0.045em;
+            "
+          >
+            Rover hardware and mechanism testing.
+          </h2>
+
+          <div class="video-grid">
+            <div
+              class="video-card"
+              style="grid-column: 1 / -1;"
+            >
+              <img
+                src="../assets/images/mars-rover.jpeg"
+                alt="Odyssey Mars Rover CAD design and physical prototype"
+                loading="lazy"
+                style="
+                  display: block;
+                  width: 100%;
+                  max-height: 720px;
+                  object-fit: contain;
+                  background: #0f1218;
+                "
+              >
+
+              <p>Odyssey rover CAD design and physical prototype</p>
+            </div>
+
+            <div
+              class="video-card"
+              style="grid-column: 1 / -1;"
+            >
+              <video controls playsinline preload="metadata">
+                <source
+                  src="../assets/videos/mars-rover/Rover_video_mechanism.mp4"
+                  type="video/mp4"
+                >
+
+                Your browser does not support HTML video.
+              </video>
+
+              <p>Rover drive mechanism demonstration</p>
+            </div>
+          </div>
+        </section>
+
+        <div class="project-visual">
+          <div class="architecture">
+            <div class="node">
+              <small>01 / PERCEIVE</small>
+
+              <div>
+                <strong>Camera + Depth</strong>
+                <p>Detect terrain, obstacles, craters, and samples</p>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+              <small>02 / NAVIGATE</small>
+
+              <div>
+                <strong>ROS 2</strong>
+                <p>Plan rover motion through uneven terrain</p>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+              <small>03 / MANIPULATE</small>
+
+              <div>
+                <strong>5-DOF Arm</strong>
+                <p>Pick, transport, and place samples</p>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="node">
+              <small>04 / INTEGRATE</small>
+
+              <div>
+                <strong>Power + Embedded</strong>
+                <p>Coordinate compute, sensing, actuation, and safety</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="shell case-layout">
+        <nav
+          class="case-nav"
+          aria-label="Case study sections"
+        >
+          <a href="#problem">01 Problem</a>
+          <a href="#architecture">02 Architecture</a>
+          <a href="#mobility">03 Mobility</a>
+          <a href="#power">04 Power Distribution</a>
+          <a href="#perception">05 Perception</a>
+          <a href="#manipulator">06 Manipulator</a>
+          <a href="#leadership">07 Leadership</a>
+          <a href="#technologies">08 Technologies</a>
+        </nav>
+
+        <div class="case-content">
+          <section id="problem">
+            <p class="eyebrow">01 / Problem</p>
+
+            <h2>
+              Build one rover from many interdependent subsystems.
+            </h2>
+
+            <p>
+              The challenge required an integrated mobile robotic system
+              capable of uneven-terrain mobility, obstacle and crater
+              detection, sample pick-and-place, onboard perception,
+              autonomous task execution, and emergency response.
+            </p>
+
+            <p>
+              The rover also required reliable communication and power
+              distribution across its navigation, perception, manipulation,
+              mobility, and embedded control subsystems.
+            </p>
+          </section>
+
+          <section id="architecture">
+            <p class="eyebrow">02 / System Architecture</p>
+
+            <h2>
+              A modular architecture for mobility, autonomy, and manipulation.
+            </h2>
+
+            <p>
+              I led the system planning for a modular rover architecture using
+              ROS 2, Jetson Nano computing, Arduino-based sensor interfacing,
+              camera and depth perception, path planning, and a 5-DOF
+              manipulator for sample handling.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>Main Compute</span>
+                <strong>Jetson Nano</strong>
+              </div>
+
+              <div class="fact">
+                <span>Sensor Interface</span>
+                <strong>Arduino Mega</strong>
+              </div>
+
+              <div class="fact">
+                <span>Depth Perception</span>
+                <strong>RealSense D435i</strong>
+              </div>
+
+              <div class="fact">
+                <span>Software Framework</span>
+                <strong>ROS 2</strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="mobility">
+            <p class="eyebrow">03 / Mobility</p>
+
+            <h2>
+              Design for uneven terrain and mechanical stability.
+            </h2>
+
+            <p>
+              The mobility system was planned for stable traversal over
+              uneven terrain while preserving ground clearance, traction,
+              and access to the rover electronics.
+            </p>
+
+            <p>
+              Drive-system decisions affected mechanical packaging, motor
+              selection, battery requirements, current demand, and the
+              placement of the rover electronics.
+            </p>
+          </section>
+
+          <section id="power">
+            <p class="eyebrow">04 / Power Distribution</p>
+
+            <h2>
+              Distribute power safely across propulsion, compute, and sensing.
+            </h2>
+
+            <p>
+              The power-distribution architecture separates high-current motor
+              loads from the regulated supplies required by the computing and
+              sensing electronics.
+            </p>
+
+            <div
+              class="video-card"
+              style="margin: 2rem 0;"
+            >
+              <img
+                src="../assets/images/mars-rover/power-distribution.jpeg"
+                alt="Power distribution architecture"
+                loading="lazy"
+                style="
+                  display: block;
+                  width: 100%;
+                  height: auto;
+                  object-fit: contain;
+                  background: white;
+                "
+              >
+
+              <p>Power distribution and Control architecture</p>
+            </div>
+
+            <p>
+              Two battery domains support different rover loads. Motor drivers
+              distribute power to the drive and actuator motors, while buck
+              converters generate regulated voltage rails for the Jetson Nano,
+              Arduino Mega, sensors, and supporting electronics.
+            </p>
+
+            <p>
+              The Jetson Nano handles camera input and high-level computation.
+              It communicates with the Arduino Mega through UART. The Arduino
+              interfaces with the voltage, current, and temperature sensors
+              used to monitor the electrical system.
+            </p>
+
+            <p>
+              A kill switch provides an emergency method for interrupting
+              rover power. This creates a system-level safety layer during
+              integration, testing, and operation.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>Energy Storage</span>
+                <strong>22.2 V + 48 V battery domains</strong>
+              </div>
+
+              <div class="fact">
+                <span>Motor Loads</span>
+                <strong>12 V and 18 V motor groups</strong>
+              </div>
+
+              <div class="fact">
+                <span>Compute and Control</span>
+                <strong>Jetson Nano + Arduino Mega</strong>
+              </div>
+
+              <div class="fact">
+                <span>Safety and Monitoring</span>
+                <strong>Sensors + emergency kill switch</strong>
+              </div>
+            </div>
+
+            <div class="callout">
+              <strong>Design Objective</strong>
+
+              Provide the motors with the required power while protecting the
+              lower-voltage compute and sensing hardware through regulated
+              power conversion, monitoring, and emergency shutdown.
+            </div>
+          </section>
+
+          <section id="perception">
+            <p class="eyebrow">05 / Perception and Navigation</p>
+
+            <h2>
+              Connect environmental sensing to rover motion.
+            </h2>
+
+            <p>
+              The perception stack combined camera and depth information for
+              terrain understanding, obstacle and crater detection, and sample
+              identification.
+            </p>
+
+            <p>
+              Navigation planning incorporated A* search, OpenCV, point-cloud
+              processing, coordinate transforms, and ROS 2 interfaces to
+              connect perception results with rover motion.
+            </p>
+          </section>
+
+          <section id="manipulator">
+            <p class="eyebrow">06 / Sample Manipulation</p>
+
+            <h2>
+              Pick, transport, and place mission samples.
+            </h2>
+
+            <p>
+              A 5-DOF manipulator was included for sample handling. The arm
+              architecture required coordination between mechanical design,
+              actuation, perception, motion planning, and the mobile base.
+            </p>
+
+            <p>
+              MoveIt2 and TF2 supported manipulator planning,
+              coordinate-frame management, and integration with the rover
+              software stack.
+            </p>
+          </section>
+
+          <section id="leadership">
+            <p class="eyebrow">07 / Leadership and Result</p>
+
+            <h2>
+              Lead a 30-member multidisciplinary robotics team.
+            </h2>
+
+            <p>
+              I founded the team and led system planning across the mechanical,
+              electrical, embedded, perception, navigation, and manipulation
+              groups.
+            </p>
+
+            <p>
+              This required defining subsystem responsibilities, coordinating
+              interfaces, reviewing technical decisions, and maintaining a
+              common rover architecture across the team.
+            </p>
+
+            <div class="callout">
+              <strong>Competition Result</strong>
+
+              The team qualified within the top 10% of IRoC-U 2024 teams.
+            </div>
+          </section>
+
+          <section id="technologies">
+            <p class="eyebrow">08 / Technologies</p>
+
+            <h2>
+              Robotics, embedded systems, and mechanical integration.
+            </h2>
+
+            <div class="skill-cloud">
+              <span>ROS 2</span>
+              <span>Jetson Nano</span>
+              <span>Arduino Mega</span>
+              <span>RealSense D435i</span>
+              <span>YOLO</span>
+              <span>OpenCV</span>
+              <span>PCL</span>
+              <span>A*</span>
+              <span>MoveIt2</span>
+              <span>TF2</span>
+              <span>UART</span>
+              <span>Motor Drivers</span>
+              <span>Buck Converters</span>
+              <span>Power Distribution</span>
+              <span>CAD</span>
+              <span>3D Printing</span>
+              <span>System Integration</span>
+            </div>
+
+            <a class="button" href="../projects.html">
+              Back to all projects ↗
+            </a>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>
+        © <span data-year></span> SRIVIDYA SRINIVAS
+      </p>
+
+      <div class="footer-links">
+        <a href="../projects.html">All projects</a>
+        <a href="mailto:ss7703@columbia.edu">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/main.js"></script>
+</body>
+
+</html>

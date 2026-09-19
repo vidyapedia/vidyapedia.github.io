@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="description"
+    content="Physics-informed longitudinal brain MRI registration using Neural ODEs, signed distance fields, segmentation labels, and deformation analysis."
+  >
+
+  <title>
+    Physics-Informed Brain MRI Registration | Srividya Srinivas
+  </title>
+
+  <link rel="stylesheet" href="../assets/style.css">
+
+  <style>
+    /* =========================================================
+       PAGE FOUNDATION
+       ========================================================= */
+
+    html,
+    body {
+      background: #ffffff;
+      color: #101217;
+    }
+
+
+    /* =========================================================
+       HEADER
+       DARK BACKGROUND = WHITE TEXT
+       ========================================================= */
+
+    .site-header {
+      background: #050608 !important;
+      color: #ffffff !important;
+    }
+
+    .site-header .brand,
+    .site-header .brand:link,
+    .site-header .brand:visited,
+    .site-header .main-nav > a,
+    .site-header .main-nav > a:link,
+    .site-header .main-nav > a:visited,
+    .site-header .nav-trigger,
+    .site-header .menu-toggle {
+      color: #ffffff !important;
+    }
+
+    .site-header .nav-trigger,
+    .site-header .menu-toggle {
+      background: transparent !important;
+    }
+
+    .site-header .dropdown {
+      background: #0d1117 !important;
+    }
+
+    .site-header .dropdown a,
+    .site-header .dropdown a:link,
+    .site-header .dropdown a:visited {
+      color: #ffffff !important;
+      background: #0d1117 !important;
+    }
+
+    .site-header .dropdown a:hover,
+    .site-header .dropdown a:focus-visible {
+      color: #101217 !important;
+      background: #ffffff !important;
+    }
+
+
+    /* =========================================================
+       PROJECT HERO
+       DARK BACKGROUND = LIGHT TEXT
+       ========================================================= */
+
+    .project-hero {
+      background: #101318 !important;
+      color: #ffffff !important;
+    }
+
+    .project-hero .breadcrumb,
+    .project-hero .breadcrumb a,
+    .project-hero .eyebrow,
+    .project-hero h1,
+    .project-hero h1 span,
+    .project-hero .project-lede {
+      color: #ffffff !important;
+    }
+
+    .project-hero .breadcrumb {
+      opacity: 1 !important;
+    }
+
+    .project-hero .breadcrumb a {
+      text-decoration-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .project-hero .eyebrow {
+      color: #9ca5ae !important;
+    }
+
+    .project-hero h1 span {
+      color: #bfc6cd !important;
+    }
+
+    .project-hero .project-lede {
+      color: #c3c9cf !important;
+    }
+
+
+    /* =========================================================
+       PROJECT META
+       HERO IS DARK, SO META MUST ALSO BE LIGHT
+       ========================================================= */
+
+    .project-meta {
+      color: #ffffff !important;
+    }
+
+    .project-meta .meta-cell {
+      color: #ffffff !important;
+      border-color: #343b43 !important;
+    }
+
+    .project-meta .meta-cell span {
+      color: #9ca5ae !important;
+    }
+
+    .project-meta .meta-cell strong {
+      color: #ffffff !important;
+    }
+
+
+    /* =========================================================
+       BRAIN MEDIA
+       DARK CARD = WHITE/LIGHT CAPTION
+       ========================================================= */
+
+    .brain-media {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 3rem;
+    }
+
+    .brain-media-card {
+      display: flex;
+      flex-direction: column;
+      margin: 0;
+      overflow: hidden;
+      color: #ffffff !important;
+      border: 1px solid #343b43;
+      background: #0f1218 !important;
+    }
+
+    .brain-media-card img {
+      display: block;
+      width: 100%;
+      height: 650px;
+      object-fit: contain;
+      background: #ffffff;
+    }
+
+    .brain-media-card figcaption {
+      flex: 1;
+      padding: 1rem;
+      color: #e8ebee !important;
+      background: #0f1218 !important;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+
+    /* =========================================================
+       PIPELINE VISUAL INSIDE HERO
+       DARK BACKGROUND = LIGHT TEXT
+       ========================================================= */
+
+    .project-visual {
+      color: #ffffff !important;
+    }
+
+    .project-visual .architecture {
+      color: #ffffff !important;
+    }
+
+    .project-visual .node {
+      color: #ffffff !important;
+      background: #15191f !important;
+      border-color: #343b43 !important;
+    }
+
+    .project-visual .node small {
+      color: #9ca5ae !important;
+    }
+
+    .project-visual .node strong {
+      color: #ffffff !important;
+    }
+
+    .project-visual .node p {
+      color: #bfc6cd !important;
+    }
+
+    .project-visual .arrow {
+      color: #9ca5ae !important;
+    }
+
+
+    /* =========================================================
+       MAIN CASE STUDY
+       WHITE BACKGROUND = DARK TEXT
+       ========================================================= */
+
+    .section.white {
+      background: #ffffff !important;
+      color: #101217 !important;
+    }
+
+    .section.white .case-layout,
+    .section.white .case-content,
+    .section.white .case-content section {
+      background: #ffffff !important;
+      color: #101217 !important;
+    }
+
+    .section.white h1,
+    .section.white h2,
+    .section.white h3,
+    .section.white h4,
+    .section.white strong {
+      color: #101217 !important;
+    }
+
+    .section.white p {
+      color: #475161 !important;
+    }
+
+    .section.white .eyebrow {
+      color: #697179 !important;
+    }
+
+
+    /* =========================================================
+       CASE NAVIGATION
+       WHITE BACKGROUND = DARK TEXT
+       ========================================================= */
+
+    .case-nav {
+      background: #ffffff !important;
+      color: #101217 !important;
+    }
+
+    .case-nav a,
+    .case-nav a:link,
+    .case-nav a:visited {
+      color: #303840 !important;
+      background: #ffffff !important;
+    }
+
+    .case-nav a:hover,
+    .case-nav a:focus-visible {
+      color: #ffffff !important;
+      background: #101318 !important;
+    }
+
+
+    /* =========================================================
+       TIMELINE
+       WHITE BACKGROUND = DARK TEXT
+       ========================================================= */
+
+    .timeline {
+      color: #101217 !important;
+    }
+
+    .timeline-item {
+      color: #101217 !important;
+      background: #ffffff !important;
+      border-color: #d6dadd !important;
+    }
+
+    .timeline-item > span {
+      color: #697179 !important;
+    }
+
+    .timeline-item h3 {
+      color: #101217 !important;
+    }
+
+    .timeline-item p {
+      color: #475161 !important;
+    }
+
+
+    /* =========================================================
+       FACT GRID
+       LIGHT CARDS = DARK TEXT
+       ========================================================= */
+
+    .fact-grid {
+      color: #101217 !important;
+    }
+
+    .fact {
+      color: #101217 !important;
+      background: #f4f5f6 !important;
+      border-color: #d7dbde !important;
+    }
+
+    .fact span {
+      color: #697179 !important;
+    }
+
+    .fact strong {
+      color: #101217 !important;
+    }
+
+
+    /* =========================================================
+       TECHNOLOGY TAGS
+       WHITE BACKGROUND = DARK TEXT
+       ========================================================= */
+
+    .tag-cloud {
+      color: #101217 !important;
+    }
+
+    .tag-cloud span {
+      color: #101217 !important;
+      background: #ffffff !important;
+      border-color: #8b9299 !important;
+    }
+
+
+    /* =========================================================
+       BUTTON IN WHITE SECTION
+       DARK BUTTON = WHITE TEXT
+       ========================================================= */
+
+    .section.white .button,
+    .section.white .button:link,
+    .section.white .button:visited {
+      color: #ffffff !important;
+      background: #101318 !important;
+      border-color: #101318 !important;
+    }
+
+    .section.white .button:hover,
+    .section.white .button:focus-visible {
+      color: #101318 !important;
+      background: #ffffff !important;
+      border-color: #101318 !important;
+    }
+
+
+    /* =========================================================
+       FOOTER
+       DARK BACKGROUND = WHITE TEXT
+       ========================================================= */
+
+    .site-footer {
+      background: #050608 !important;
+      color: #ffffff !important;
+    }
+
+    .site-footer p,
+    .site-footer a,
+    .site-footer a:link,
+    .site-footer a:visited {
+      color: #ffffff !important;
+    }
+
+    .site-footer a:hover,
+    .site-footer a:focus-visible {
+      color: #d9e6ff !important;
+    }
+
+
+    /* =========================================================
+       RESPONSIVE BRAIN MEDIA
+       ========================================================= */
+
+    @media (max-width: 800px) {
+      .brain-media {
+        grid-template-columns: 1fr;
+      }
+
+      .brain-media-card img {
+        height: auto;
+        max-height: 900px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip-link" href="#main">
+    Skip to content
+  </a>
+
+  <header class="site-header">
+    <div class="nav-shell">
+      <a class="brand" href="../index.html">
+        <span class="brand-mark">SS</span>
+        SRIVIDYA SRINIVAS
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        MENU
+      </button>
+
+      <nav
+        class="main-nav"
+        id="main-nav"
+        aria-label="Primary navigation"
+      >
+        <a href="../index.html">
+          Home
+        </a>
+
+        <a href="../about.html">
+          Experience
+        </a>
+
+        <div class="nav-group">
+          <button
+            class="nav-trigger"
+            type="button"
+            aria-expanded="false"
+          >
+            Projects
+          </button>
+
+          <div class="dropdown">
+            <a href="../projects.html">
+            All projects
+            </a>
+
+            <a href="pressure-washing-drone.html">
+            Pressure-washing drone
+            </a>
+
+            <a href="ros2-patrol.html" aria-current="page">
+            ROS 2 patrol robot
+            </a>
+
+            <a href="mars-rover.html">
+            Odyssey Mars Rover
+            </a>
+
+            <a href="quadruped.html">
+            Quadruped robot
+            </a>
+
+            <a href="brain-registration.html">
+            Brain MRI registration
+            </a>
+          </div>
+        </div>
+
+        <a href="../research.html">
+          Research
+        </a>
+
+        <a href="../resume.html">
+          Resume
+        </a>
+
+        <a href="../contact.html">
+          Contact
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="project-hero">
+      <div class="shell">
+        <div class="breadcrumb">
+          <a href="../projects.html">
+            Projects
+          </a>
+          /
+          Computational research
+        </div>
+
+        <p class="eyebrow">
+          Medical imaging · Computational mechanics · Machine learning
+        </p>
+
+        <h1>
+          Physics-Informed Brain MRI Registration
+
+          <span>
+            Longitudinal deformation modeling using Neural ODEs.
+          </span>
+        </h1>
+
+        <p class="project-lede">
+          A computational research project for aligning longitudinal
+          3D brain MRI scans and estimating how regional brain tissue
+          deforms over time. The pipeline combines medical-image
+          segmentation, signed distance fields, continuous Neural ODE
+          transformations, physics-informed correction, and
+          region-based evaluation.
+        </p>
+
+        <div class="project-meta">
+          <div class="meta-cell">
+            <span>
+              Research Context
+            </span>
+
+            <strong>
+              Tepolé Lab · Columbia University
+            </strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>
+              Input
+            </span>
+
+            <strong>
+              Longitudinal 3D T1 MRI
+            </strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>
+              Model
+            </span>
+
+            <strong>
+              Physics-informed Neural ODE
+            </strong>
+          </div>
+
+          <div class="meta-cell">
+            <span>
+              Evaluation
+            </span>
+
+            <strong>
+              Regional labels and Dice scores
+            </strong>
+          </div>
+        </div>
+
+        <div class="brain-media">
+          <figure class="brain-media-card">
+            <img
+              src="../assets/images/brain-registration/brain1%20(1).jpeg"
+              alt="Signed distance field, T1 MRI slice, and multi-view brain segmentation visualization"
+            >
+
+            <figcaption>
+              Preprocessing outputs used to construct the registration
+              inputs. The figure combines a volumetric signed distance
+              field, an axial T1 MRI slice with regional label
+              information, and sagittal and coronal views of the
+              segmented brain regions.
+            </figcaption>
+          </figure>
+
+          <figure class="brain-media-card">
+            <img
+              src="../assets/images/brain-registration/brain%20(1).jpeg"
+              alt="Three-dimensional boundary visualization of the brain surface and ventricular structure"
+              loading="lazy"
+            >
+
+            <figcaption>
+              Multi-view 3D visualization of extracted anatomical
+              boundary points. The outer brain surface and internal
+              ventricular structure are displayed together to verify
+              coordinate orientation, relative position, and geometric
+              consistency before deformation modeling.
+            </figcaption>
+          </figure>
+        </div>
+
+        <div class="project-visual">
+          <div class="architecture">
+            <div class="node">
+              <small>
+                01 / PREPARE
+              </small>
+
+              <div>
+                <strong>
+                  MRI and Labels
+                </strong>
+
+                <p>
+                  Load baseline and follow-up volumes with regional
+                  segmentation masks.
+                </p>
+              </div>
+            </div>
+
+            <div class="arrow">
+              →
+            </div>
+
+            <div class="node">
+              <small>
+                02 / REPRESENT
+              </small>
+
+              <div>
+                <strong>
+                  Boundaries and SDFs
+                </strong>
+
+                <p>
+                  Convert anatomical regions into geometric
+                  representations for deformation analysis.
+                </p>
+              </div>
+            </div>
+
+            <div class="arrow">
+              →
+            </div>
+
+            <div class="node">
+              <small>
+                03 / DEFORM
+              </small>
+
+              <div>
+                <strong>
+                  Neural ODE
+                </strong>
+
+                <p>
+                  Model spatial transformation as a continuous
+                  deformation process.
+                </p>
+              </div>
+            </div>
+
+            <div class="arrow">
+              →
+            </div>
+
+            <div class="node">
+              <small>
+                04 / EVALUATE
+              </small>
+
+              <div>
+                <strong>
+                  Regional Alignment
+                </strong>
+
+                <p>
+                  Warp labels and measure registration quality using
+                  regional overlap.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="shell case-layout">
+        <nav
+          class="case-nav"
+          aria-label="Case study sections"
+        >
+          <a href="#problem">
+            01 Problem
+          </a>
+
+          <a href="#pipeline">
+            02 Pipeline
+          </a>
+
+          <a href="#geometry">
+            03 Geometry
+          </a>
+
+          <a href="#neural-ode">
+            04 Neural ODE
+          </a>
+
+          <a href="#physics">
+            05 Physics
+          </a>
+
+          <a href="#evaluation">
+            06 Evaluation
+          </a>
+
+          <a href="#contribution">
+            07 Contribution
+          </a>
+
+          <a href="#robotics">
+            08 Robotics relevance
+          </a>
+
+          <a href="#technologies">
+            09 Technologies
+          </a>
+        </nav>
+
+        <div class="case-content">
+          <section id="problem">
+            <p class="eyebrow">
+              01 / Problem
+            </p>
+
+            <h2>
+              Longitudinal brain scans must be aligned before tissue
+              changes can be measured.
+            </h2>
+
+            <p>
+              Brain MRI scans collected at different time points do not
+              naturally share perfect anatomical alignment. Differences
+              in patient positioning, image acquisition, anatomy, and
+              tissue change make direct voxel-to-voxel comparison
+              unreliable.
+            </p>
+
+            <p>
+              The registration system must estimate a spatial
+              transformation that aligns corresponding anatomical
+              regions while still representing realistic tissue
+              deformation.
+            </p>
+
+            <p>
+              This becomes especially challenging when the objective is
+              to quantify subtle regional shrinkage rather than simply
+              produce visually similar images.
+            </p>
+          </section>
+
+          <section id="pipeline">
+            <p class="eyebrow">
+              02 / Registration Pipeline
+            </p>
+
+            <h2>
+              From longitudinal MRI volumes to measurable deformation.
+            </h2>
+
+            <p>
+              The pipeline processes baseline and follow-up T1 MRI
+              volumes together with regional segmentation masks.
+              Anatomical boundaries are extracted from the segmentations
+              and represented using signed distance fields.
+            </p>
+
+            <p>
+              A Neural ODE model estimates a continuous transformation
+              between the scans. The resulting deformation is used to
+              warp boundaries and segmentation labels into a common
+              coordinate frame.
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <span>
+                  Load
+                </span>
+
+                <div>
+                  <h3>
+                    Prepare the longitudinal scan pair.
+                  </h3>
+
+                  <p>
+                    Load the baseline scan, follow-up scan, and
+                    corresponding regional segmentation labels.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>
+                  Extract
+                </span>
+
+                <div>
+                  <h3>
+                    Convert regional masks into boundaries.
+                  </h3>
+
+                  <p>
+                    Extract anatomical surfaces and boundary points from
+                    segmented brain regions.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>
+                  Transform
+                </span>
+
+                <div>
+                  <h3>
+                    Estimate the continuous deformation field.
+                  </h3>
+
+                  <p>
+                    Use the Neural ODE transformation to map coordinates
+                    between longitudinal scans.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>
+                  Validate
+                </span>
+
+                <div>
+                  <h3>
+                    Measure regional registration quality.
+                  </h3>
+
+                  <p>
+                    Warp segmentation labels and compare anatomical
+                    overlap using quantitative metrics.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="geometry">
+            <p class="eyebrow">
+              03 / Geometric Representation
+            </p>
+
+            <h2>
+              Signed distance fields convert anatomy into usable geometry.
+            </h2>
+
+            <p>
+              Segmentation masks identify anatomical regions as discrete
+              voxel labels. Boundary extraction converts those regions
+              into geometric surfaces that can be transformed and
+              compared.
+            </p>
+
+            <p>
+              Signed distance fields encode the distance from each
+              location to a regional boundary while preserving whether
+              the location lies inside or outside the structure.
+              This creates a smooth geometric representation for
+              registration and physics-informed correction.
+            </p>
+
+            <p>
+              Three-dimensional boundary visualizations are used to
+              inspect the position and orientation of internal and
+              external anatomical structures before applying the
+              deformation model.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>
+                  Image Representation
+                </span>
+
+                <strong>
+                  3D voxel volumes
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Anatomical Reference
+                </span>
+
+                <strong>
+                  Segmentation masks
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Geometry
+                </span>
+
+                <strong>
+                  Extracted boundaries
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Spatial Encoding
+                </span>
+
+                <strong>
+                  Signed distance fields
+                </strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="neural-ode">
+            <p class="eyebrow">
+              04 / Neural ODE Model
+            </p>
+
+            <h2>
+              Model deformation as a continuous transformation.
+            </h2>
+
+            <p>
+              A Neural Ordinary Differential Equation represents the
+              coordinate transformation through continuous dynamics
+              rather than predicting a complete displacement in one
+              step.
+            </p>
+
+            <p>
+              The model defines how spatial points move through an
+              artificial time variable. Integrating these dynamics
+              produces a deformation field that maps anatomical
+              coordinates between the baseline and follow-up scans.
+            </p>
+
+            <p>
+              This formulation supports forward deformation, inverse
+              mapping, boundary warping, and visualization of how
+              regional anatomy changes across time points.
+            </p>
+          </section>
+
+          <section id="physics">
+            <p class="eyebrow">
+              05 / Physics-Informed Correction
+            </p>
+
+            <h2>
+              Image similarity alone does not guarantee realistic motion.
+            </h2>
+
+            <p>
+              A registration model can produce strong intensity
+              alignment while still creating spatial transformations
+              that are difficult to interpret physically.
+            </p>
+
+            <p>
+              Physics-informed correction introduces model-based
+              information into the deformation pipeline. The objective
+              is to preserve meaningful geometry, reduce unrealistic
+              deformation, and improve the interpretation of regional
+              tissue motion.
+            </p>
+
+            <p>
+              Combining learned transformations with geometric and
+              physical constraints makes the resulting deformation field
+              more useful for longitudinal tissue analysis.
+            </p>
+          </section>
+
+          <section id="evaluation">
+            <p class="eyebrow">
+              06 / Evaluation
+            </p>
+
+            <h2>
+              Validate the transformation using anatomical labels.
+            </h2>
+
+            <p>
+              Registration quality is evaluated by applying the estimated
+              transformation to regional segmentation labels and
+              comparing them with the target anatomy.
+            </p>
+
+            <p>
+              Dice scores measure the spatial overlap between the warped
+              and target regions. Regional evaluation is important
+              because a visually plausible whole-brain alignment may
+              still contain local errors around individual structures.
+            </p>
+
+            <p>
+              Visual inspection of warped boundaries complements the
+              quantitative scores by revealing incorrect coordinate
+              directions, local distortions, or failures around
+              anatomical interfaces.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>
+                  Validation Data
+                </span>
+
+                <strong>
+                  Regional labels
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Primary Metric
+                </span>
+
+                <strong>
+                  Dice overlap
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Visual Check
+                </span>
+
+                <strong>
+                  Boundary warping
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Mapping Check
+                </span>
+
+                <strong>
+                  Forward and inverse deformation
+                </strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="contribution">
+            <p class="eyebrow">
+              07 / Research Contribution
+            </p>
+
+            <h2>
+              Building and debugging a complete research pipeline.
+            </h2>
+
+            <p>
+              My work involved developing and debugging components for
+              longitudinal brain-data processing, segmentation handling,
+              boundary extraction, signed distance field construction,
+              deformation visualization, inverse coordinate mapping,
+              and quantitative registration evaluation.
+            </p>
+
+            <p>
+              The work also involved running experiments on GPU
+              computing infrastructure, tracing shape and coordinate
+              inconsistencies, inspecting intermediate outputs, and
+              validating whether transformations were being applied in
+              the correct spatial direction.
+            </p>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <span>
+                  Process
+                </span>
+
+                <div>
+                  <h3>
+                    Prepare longitudinal imaging data.
+                  </h3>
+
+                  <p>
+                    Work with volumetric scans, segmentation masks,
+                    regional labels, and derived geometric data.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>
+                  Debug
+                </span>
+
+                <div>
+                  <h3>
+                    Trace spatial and computational errors.
+                  </h3>
+
+                  <p>
+                    Inspect array shapes, coordinate conventions,
+                    transformation direction, and intermediate outputs.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>
+                  Visualize
+                </span>
+
+                <div>
+                  <h3>
+                    Make deformation behavior interpretable.
+                  </h3>
+
+                  <p>
+                    Visualize boundaries, warped regions, deformation
+                    fields, and longitudinal alignment.
+                  </p>
+                </div>
+              </div>
+
+              <div class="timeline-item">
+                <span>
+                  Measure
+                </span>
+
+                <div>
+                  <h3>
+                    Quantify regional performance.
+                  </h3>
+
+                  <p>
+                    Compare warped and target segmentation regions using
+                    repeatable quantitative metrics.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="robotics">
+            <p class="eyebrow">
+              08 / Robotics Relevance
+            </p>
+
+            <h2>
+              Registration shares core geometric ideas with robotics.
+            </h2>
+
+            <p>
+              Although the application is medical imaging, the pipeline
+              shares several core problems with robotic perception and
+              spatial estimation. These include coordinate-frame
+              reasoning, correspondence estimation, geometric
+              transformations, boundary processing, forward and inverse
+              mapping, and quantitative comparison between predicted and
+              observed geometry.
+            </p>
+
+            <p>
+              Deformation fields extend these ideas beyond rigid-body
+              motion. This is relevant to deformable-object tracking,
+              surgical robotics, soft robotics, non-rigid mapping,
+              simulation validation, and model-based perception.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <span>
+                  Registration
+                </span>
+
+                <strong>
+                  Spatial correspondence
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Transforms
+                </span>
+
+                <strong>
+                  Coordinate mapping
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Geometry
+                </span>
+
+                <strong>
+                  Boundary processing
+                </strong>
+              </div>
+
+              <div class="fact">
+                <span>
+                  Validation
+                </span>
+
+                <strong>
+                  Model versus observation
+                </strong>
+              </div>
+            </div>
+          </section>
+
+          <section id="technologies">
+            <p class="eyebrow">
+              09 / Technologies
+            </p>
+
+            <h2>
+              Medical-image processing, differentiable modeling, and HPC.
+            </h2>
+
+            <div class="tag-cloud">
+              <span>Python</span>
+              <span>JAX</span>
+              <span>Optax</span>
+              <span>Neural ODEs</span>
+              <span>3D T1 MRI</span>
+              <span>Deformable Registration</span>
+              <span>Segmentation Masks</span>
+              <span>Signed Distance Fields</span>
+              <span>Boundary Extraction</span>
+              <span>Deformation Fields</span>
+              <span>Dice Score</span>
+              <span>GPU Computing</span>
+              <span>HPC</span>
+              <span>Scientific Visualization</span>
+            </div>
+
+            <a
+              class="button"
+              href="../projects.html"
+            >
+              Back to all projects ↗
+            </a>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-grid">
+      <p>
+        © <span data-year></span> SRIVIDYA SRINIVAS
+      </p>
+
+      <div class="footer-links">
+        <a href="../projects.html">
+          All projects
+        </a>
+
+        <a href="mailto:ss7703@columbia.edu">
+          Email
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../assets/main.js"></script>
+</body>
+</html>
