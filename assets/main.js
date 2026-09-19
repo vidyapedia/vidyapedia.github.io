@@ -102,7 +102,7 @@
           Research
         </a>
 
-        <a href="resume.html">
+        <a href="../resume.html">
           Resume
         </a>
 
@@ -411,7 +411,7 @@
           Research
         </a>
 
-        <a href="resume.html">
+        <a href="../resume.html">
           Resume
         </a>
 
